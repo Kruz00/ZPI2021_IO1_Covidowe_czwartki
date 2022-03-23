@@ -4,9 +4,10 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Covidowe czwartki" + " bartekrozycki" + " Scrum Master");
+        System.out.println("Kruz00" + " Tester");
         System.out.println("JakZaj" + " developer");
-        System.out.println("Krzysztof Trzeciak: " + "qushishu");
-        System.out.println("jchrustowski");
+        System.out.println("qushishu" + " tester");
+        System.out.println("jchrustowski" + " developer");
 
-    }
+    } 
 }
