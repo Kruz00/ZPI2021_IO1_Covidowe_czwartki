@@ -6,6 +6,7 @@ public class Main {
         System.out.println("Covidowe czwartki" + " bartekrozycki" + " Scrum Master");
         System.out.println("JakZaj" + " developer");
         System.out.println("Krzysztof Trzeciak: " + "qushishu");
+        System.out.println("jchrustowski");
 
     }
 }
