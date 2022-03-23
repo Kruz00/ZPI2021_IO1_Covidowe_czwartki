@@ -7,5 +7,7 @@ public class Main {
         System.out.println("Kruz00" + " Tester");
         System.out.println("JakZaj" + " developer");
         System.out.println("qushishu" + " tester");
+        System.out.println("jchrustowski" + " developer");
+
     } 
 }
