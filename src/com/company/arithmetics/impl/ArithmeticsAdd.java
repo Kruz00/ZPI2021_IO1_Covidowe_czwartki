@@ -4,7 +4,7 @@ import com.company.arithmetics.IArithmeticsAdd;
 
 public class ArithmeticsAdd implements IArithmeticsAdd {
 
-	@Override
+	@Override // rofl
 	public Double Addition(Double A, Double B) {
 		return A + B;
 	}
