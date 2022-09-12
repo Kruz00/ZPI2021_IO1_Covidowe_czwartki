@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import DropdownList from "react-widgets/DropdownList";
-import "react-widgets/styles.css";
+import Dropdown from './Dropdown'
 
 const DataInputSection = () => {
 
@@ -11,12 +10,9 @@ const DataInputSection = () => {
   const [period, setPeriod] = useState("")
   return (
     <div>
-      <div> Waluta główna:</div>
-      <DropdownList onChange={value => setMainCurrency(value)} data={currency}/>
-      <div> Waluta dla kursu:</div>
-      <DropdownList onChange={value => setSecondCurrency(value)} data={currency}/>
-      <div> Przedział czasowy:</div>
-      <DropdownList onChange={value => setPeriod(value)} data={periods}/>
+      <Dropdown title = "Waluta główna:" items={currency} callback={setMainCurrency}></Dropdown>
+      <Dropdown title = "Waluta dla kursu" items={currency} callback={setSecondCurrency}></Dropdown>
+      <Dropdown title = "Przedział czasowy:" items={periods} callback={setPeriod}></Dropdown>
       <button>Analizuj</button>
     </div>
   )
