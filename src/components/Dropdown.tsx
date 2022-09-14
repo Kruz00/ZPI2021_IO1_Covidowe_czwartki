@@ -3,11 +3,11 @@ import DropdownList from "react-widgets/DropdownList";
 import "react-widgets/styles.css";
 
 const Dropdown = ({title, items, callback}
-                    : { title: string; items: string[]; callback: Function; }) => {
+                    : { title: string; items: {[k:string]:any}; callback: Function; }) => {
   return (
     <div>
       <div>{title}</div>
-      <DropdownList onChange={value => callback(value)} data={items}/>
+      <DropdownList onChange={value => callback(items[value])} data={Object.keys(items)}/>
     </div>
   )
 }

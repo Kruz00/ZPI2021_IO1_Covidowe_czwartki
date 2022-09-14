@@ -11,8 +11,8 @@ const DataInputSection = ({
                             analysisButtonCallback
                           }
                             : {
-  currency: string[];
-  periods: string[];
+  currency: {[k:string]:any};
+  periods: {[k:string]:any};
   mainCurrencyCallback: Function;
   secondCurrencyCallback: Function;
   periodCallback: Function;
