@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
-const AnalysisSection = ()=>{
-  return(
+const AnalysisSection = () => {
+  return (
     <div>test</div>
   )
 }

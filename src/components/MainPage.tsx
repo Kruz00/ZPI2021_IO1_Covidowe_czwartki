@@ -33,11 +33,11 @@ const MainPage = () => {
     try {
       const response = await getTimeIntervalJSON(mainCurrency, period)
       const response2 = await getTimeIntervalJSON(secondCurrency, period)
+
+      setAnalysisSectionVisibilty(true)
     } catch (error) {
       setApiError(true)
     }
-
-    setAnalysisSectionVisibilty(true)
   }
   return (
     <div>
