@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CustomTable = ({grow, probate, unchanged}
+const SessionTable = ({grow, probate, unchanged}
                                 : { grow: number, probate: number, unchanged: number}) => {
 
   return (
@@ -25,4 +25,4 @@ const CustomTable = ({grow, probate, unchanged}
   )
 }
 
-export default CustomTable
+export default SessionTable
