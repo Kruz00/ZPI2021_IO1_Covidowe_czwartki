@@ -8,20 +8,20 @@ const StaticMesuresTable = ({median, dominant, standardDeviation, coefficientVar
       <table>
         <tbody>
          <tr>
-          <td>Mediana</td>
-          <td>{median}</td>
+          <td>Mediana:</td>
+          <td id="leftAlign">{median}</td>
          </tr>
          <tr>
-          <td>Dominanta</td>
-          <td>{dominant}</td>
+          <td>Dominanta:</td>
+          <td id="leftAlign">{dominant}</td>
          </tr>
          <tr>
-          <td>Odchylenie standardowe</td>
-          <td>{standardDeviation}</td>
+          <td>Odchylenie standardowe:</td>
+          <td id="leftAlign">{standardDeviation}</td>
          </tr>
          <tr>
-          <td>Współczynnik zmienności</td>
-          <td>{coefficientVariation}</td>
+          <td>Współczynnik zmienności:</td>
+          <td id="leftAlign">{coefficientVariation}</td>
          </tr>
         </tbody>
       </table>
