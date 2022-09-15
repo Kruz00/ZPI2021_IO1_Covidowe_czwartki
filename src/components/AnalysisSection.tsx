@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import CustomPlot from "./CustomPlot"
+import SessionTable from "./SessionTable"
+import StaticMeasuresTable from "./StaticMeasuresTable"
 import {GetXFromJson, GetYFromJson} from "./GetXYFromJSON"
+import {GetSessionTableData, SessionTableEnum, GetStaticMeasuresTableData, StaticMeasuresTableEnum} from "./GetTableData"
 
 const AnalysisSection = ({response, response2}: { response: string; response2: string; }) => {
   var mainCurrency;
@@ -20,7 +23,7 @@ const AnalysisSection = ({response, response2}: { response: string; response2: s
   const secondCurrencyFirstPlot: any = [];
   const mainCurrencyCode = mainCurrency == null ? "PLN" : mainCurrency['code']
   const secondCurrencyCode = secondCurrency == null ? "PLN" : secondCurrency['code']
-  
+
   if (!mainCurrency && !secondCurrency) {
     return (
       <div>
@@ -32,9 +35,13 @@ const AnalysisSection = ({response, response2}: { response: string; response2: s
   const xFirstPlot = mainCurrency == null ? GetXFromJson(secondCurrency) : GetXFromJson(mainCurrency);
   const yFirstPlot: any = GetYFromJson(mainCurrency, secondCurrency);
 
+  const seassionTableData = GetSessionTableData(yFirstPlot);
+  const staticMeasuresTable = GetStaticMeasuresTableData(yFirstPlot);
   return (
     <div>
       <CustomPlot title={firstPlotTitle} x={xFirstPlot} y={yFirstPlot} type="scatter"/>
+      <SessionTable grow={seassionTableData[SessionTableEnum.Grow]} probate={seassionTableData[SessionTableEnum.Probate]} unchanged={seassionTableData[SessionTableEnum.Unchanged]}/>
+      <StaticMeasuresTable median={staticMeasuresTable[StaticMeasuresTableEnum.Median]} dominant={staticMeasuresTable[StaticMeasuresTableEnum.Dominant]} standardDeviation={staticMeasuresTable[StaticMeasuresTableEnum.StandardDeviation]} coefficientVariation={staticMeasuresTable[StaticMeasuresTableEnum.CoefficientVariation]}/>
     </div>
   )
 }
