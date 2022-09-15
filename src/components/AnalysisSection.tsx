@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import CustomPlot from "./CustomPlot"
+import {GetXFromJson, GetYFromJson} from "./GetXYFromJSON"
 
 const AnalysisSection = ({response, response2}: { response: string; response2: string; }) => {
   var mainCurrency;
@@ -15,13 +16,11 @@ const AnalysisSection = ({response, response2}: { response: string; response2: s
   } catch (error) {
     secondCurrency = null;
   }
-  const xFirstPlot: any = [];
   const mainCurrencyFirstPlot: any = [];
   const secondCurrencyFirstPlot: any = [];
-  const yFirstPlot: any = [];
   const mainCurrencyCode = mainCurrency == null ? "PLN" : mainCurrency['code']
   const secondCurrencyCode = secondCurrency == null ? "PLN" : secondCurrency['code']
-
+  
   if (!mainCurrency && !secondCurrency) {
     return (
       <div>
@@ -29,32 +28,9 @@ const AnalysisSection = ({response, response2}: { response: string; response2: s
     )
   }
 
-  if (!mainCurrency) {
-    secondCurrency.rates.forEach((e: any) => {
-      xFirstPlot.push(e["effectiveDate"]);
-      secondCurrencyFirstPlot.push(e["mid"]);
-      mainCurrencyFirstPlot.push(1);
-    });
-  } else if (!secondCurrency) {
-    mainCurrency.rates.forEach((e: any) => {
-      xFirstPlot.push(e["effectiveDate"]);
-      mainCurrencyFirstPlot.push(e["mid"]);
-      secondCurrencyFirstPlot.push(1)
-    });
-  } else {
-    mainCurrency.rates.forEach((e: any) => {
-      xFirstPlot.push(e["effectiveDate"]);
-      mainCurrencyFirstPlot.push(e["mid"]);
-    });
-
-    secondCurrency.rates.forEach((e: any) => {
-      secondCurrencyFirstPlot.push(e["mid"]);
-    });
-  }
-  for (let i = 0; i < mainCurrencyFirstPlot.length; i++) {
-    yFirstPlot.push(mainCurrencyFirstPlot[i] / secondCurrencyFirstPlot[i]);
-  }
   const firstPlotTitle = "Kurs waluty " + mainCurrencyCode + "/" + secondCurrencyCode;
+  const xFirstPlot = mainCurrency == null ? GetXFromJson(secondCurrency) : GetXFromJson(mainCurrency);
+  const yFirstPlot: any = GetYFromJson(mainCurrency, secondCurrency);
 
   return (
     <div>
