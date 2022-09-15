@@ -17,3 +17,22 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+table {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-collapse: collapse;
+}
+td {
+    width: 50%;
+    border: 2px solid black;
+    font-family: Arial;
+    font-size: large;
+    padding: 4px 8px;
+    text-align: right;
+}
+
+#leftAlign {
+    text-align: left;
+}
