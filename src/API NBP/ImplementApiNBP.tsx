@@ -1,10 +1,11 @@
-enum TimeInterval {
+export enum TimeInterval {
   Week,
   TwoWeek,
   Month,
   Quarter,
   HalfYear,
-  Year
+  Year,
+  Default
 }
 
 export async function getJSON(keyCurrency: string, startDate: string, endDate: string){
