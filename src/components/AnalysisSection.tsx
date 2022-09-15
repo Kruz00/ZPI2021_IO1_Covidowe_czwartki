@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Plot from 'react-plotly.js';
+import CustomPlot from "./CustomPlot"
 
 const AnalysisSection = ({response, response2}: { response: string; response2: string; }) => {
   var mainCurrency;
@@ -15,21 +15,13 @@ const AnalysisSection = ({response, response2}: { response: string; response2: s
   } catch (error) {
     secondCurrency = null;
   }
-
-  const config = {
-    staticPlot: true
-  };
-
   const xFirstPlot: any = [];
   const mainCurrencyFirstPlot: any = [];
   const secondCurrencyFirstPlot: any = [];
   const yFirstPlot: any = [];
   const mainCurrencyCode = mainCurrency == null ? "PLN" : mainCurrency['code']
   const secondCurrencyCode = secondCurrency == null ? "PLN" : secondCurrency['code']
-  const layoutFirstPlot = {
-    title: "Kurs waluty " + mainCurrencyCode + "/" + secondCurrencyCode,
 
-  };
   if (!mainCurrency && !secondCurrency) {
     return (
       <div>
@@ -62,17 +54,11 @@ const AnalysisSection = ({response, response2}: { response: string; response2: s
   for (let i = 0; i < mainCurrencyFirstPlot.length; i++) {
     yFirstPlot.push(mainCurrencyFirstPlot[i] / secondCurrencyFirstPlot[i]);
   }
+  const firstPlotTitle = "Kurs waluty " + mainCurrencyCode + "/" + secondCurrencyCode;
 
   return (
     <div>
-      <Plot data={[
-        {
-          type: 'scatter',
-          x: xFirstPlot,
-          y: yFirstPlot,
-          marker: {color: 'red'}
-        }
-      ]} useResizeHandler={true} style={{width: "100%", height: "100%"}} layout={layoutFirstPlot} config={config}/>
+      <CustomPlot title={firstPlotTitle} x={xFirstPlot} y={yFirstPlot} type="scatter"/>
     </div>
   )
 }
