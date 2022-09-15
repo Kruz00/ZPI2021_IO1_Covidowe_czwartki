@@ -2,40 +2,78 @@ import React, {useState} from 'react';
 import Plot from 'react-plotly.js';
 
 const AnalysisSection = ({response, response2} : {response: string; response2: string;}) => {
+    var mainCurrency;
+    try{
+        mainCurrency = JSON.parse(response);
+    } catch (error) {
+        mainCurrency = null;
+    }
 
-    const [mainCurrency, setMainCurrency] = useState(JSON.parse(response));
-    const [secondCurrency, setSecondCurrency] = useState(JSON.parse(response2));
+    var secondCurrency;
+    try{
+        secondCurrency = JSON.parse(response2);
+    } catch (error) {
+        secondCurrency = null;
+    }
     const layoutFirstPlot = {
-        title: "Kurs waluty " + mainCurrency["code"] + "/" + secondCurrency["code"],
+        title: "Kurs waluty AAA/BBB",
 
     };
     const config = {
         staticPlot: true
     };
-    let x = [2,2,2];
 
     const xFirstPlot: any=[];
     const mainCurrencyFirstPlot: any=[];
-
-    mainCurrency.rates.forEach((e: any) => {
-        xFirstPlot.push(e["effectiveDate"]);
-        mainCurrencyFirstPlot.push(e["mid"]);
-    });
-
     const secondCurrencyFirstPlot: any=[];
-
-    secondCurrency.rates.forEach((e: any) => {
-        secondCurrencyFirstPlot.push(e["mid"]);
-    });
-
     const yFirstPlot: any=[];
 
-    for (let i = 0; i < mainCurrencyFirstPlot.length; i++) {
-            yFirstPlot.push(mainCurrencyFirstPlot[i]/secondCurrencyFirstPlot[i]);
+    if(!mainCurrency && !secondCurrency){
+        return(
+                  <div>
+                  </div>
+                )
     }
 
+    if(!mainCurrency){
+        layoutFirstPlot.title = "Kurs waluty PLN/" + secondCurrency["code"];
 
-    console.log('xdddresponse ', yFirstPlot);
+        secondCurrency.rates.forEach((e: any) => {
+            xFirstPlot.push(e["effectiveDate"]);
+            secondCurrencyFirstPlot.push(e["mid"]);
+        });
+        for (let i = 0; i < secondCurrencyFirstPlot.length; i++) {
+            yFirstPlot.push(1/secondCurrencyFirstPlot[i]);
+        }
+    } else if(!secondCurrency) {
+            layoutFirstPlot.title = "Kurs waluty " + mainCurrency["code"] + "/PLN";
+
+            mainCurrency.rates.forEach((e: any) => {
+                xFirstPlot.push(e["effectiveDate"]);
+                mainCurrencyFirstPlot.push(e["mid"]);
+            });
+
+            for (let i = 0; i < mainCurrencyFirstPlot.length; i++) {
+                yFirstPlot.push(mainCurrencyFirstPlot[i]);
+            }
+
+        } else {
+            layoutFirstPlot.title = "Kurs waluty " + mainCurrency["code"] + "/" + secondCurrency["code"];
+
+            mainCurrency.rates.forEach((e: any) => {
+                xFirstPlot.push(e["effectiveDate"]);
+                mainCurrencyFirstPlot.push(e["mid"]);
+            });
+
+            secondCurrency.rates.forEach((e: any) => {
+                secondCurrencyFirstPlot.push(e["mid"]);
+            });
+
+            for (let i = 0; i < mainCurrencyFirstPlot.length; i++) {
+                yFirstPlot.push(mainCurrencyFirstPlot[i]/secondCurrencyFirstPlot[i]);
+            }
+        }
+
     return (
         <div>
          <Plot data={[
