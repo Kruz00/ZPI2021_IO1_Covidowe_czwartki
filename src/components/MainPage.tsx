@@ -20,6 +20,8 @@ const MainPage = () => {
   const [currencyError, setCurrencyError] = useState(false)
   const [apiError, setApiError] = useState(false)
   const [analysisSectionVisibilty, setAnalysisSectionVisibilty] = useState(false)
+  const [response, setResponse] = useState("")
+  const [response2, setResponse2] = useState("")
   const analize = async () => {
     if (mainCurrency === "" || secondCurrency === "" || period == TimeInterval.Default) {
       return;
@@ -31,8 +33,8 @@ const MainPage = () => {
       setCurrencyError(false)
     }
     try {
-      const response = await getTimeIntervalJSON(mainCurrency, period)
-      const response2 = await getTimeIntervalJSON(secondCurrency, period)
+        setResponse(await getTimeIntervalJSON(mainCurrency, period));
+        setResponse2(await getTimeIntervalJSON(secondCurrency, period));
 
       setAnalysisSectionVisibilty(true)
     } catch (error) {
@@ -46,7 +48,7 @@ const MainPage = () => {
                         analysisButtonCallback={analize}/>
       {currencyError ? <div>Wybór dwóch takich samych walut nie dozwolony</div> : null}
       {apiError ? <div>Problem z komunikacją z API</div> : null}
-      {analysisSectionVisibilty ? <AnalysisSection/> : null}
+      {analysisSectionVisibilty ? <AnalysisSection response={response} response2={response2} /> : null}
     </div>
 
   )
