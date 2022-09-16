@@ -9,6 +9,7 @@ import {
   GetStaticMeasuresTableData,
   StaticMeasuresTableEnum
 } from "./GetTableData"
+import {vecChange} from "./VecChange"
 
 const AnalysisSection = ({
                            response,
@@ -63,18 +64,11 @@ const AnalysisSection = ({
 
   const secondPlotTitle = "Rozkład zmian miesięcznych dla waluty " + mainCurrencyCode + "/" + secondCurrencyCode;
   const monthExchangeRate = GetYFromJson(mainCurrencyMonth, secondCurrencyMonth);
-  const monthChangeVec = []
-  for (let i = 1; i < monthExchangeRate.length; ++i) {
-    monthChangeVec.push(monthExchangeRate[i] - monthExchangeRate[i - 1])
-  }
-
+  const monthChangeVec = vecChange(monthExchangeRate)
 
   const thirdPlotTitle = "Rozkład zmian kwartalnych dla waluty " + mainCurrencyCode + "/" + secondCurrencyCode;
   const quarterExchangeRate = GetYFromJson(mainCurrencyQuarter, secondCurrencyQuarter);
-  const quarterChangeVec = []
-  for (let i = 1; i < quarterExchangeRate.length; ++i) {
-    quarterChangeVec.push(quarterExchangeRate[i] - quarterExchangeRate[i - 1])
-  }
+  const quarterChangeVec = vecChange(quarterExchangeRate)
 
   const seassionTableData = GetSessionTableData(yFirstPlot);
   const staticMeasuresTable = GetStaticMeasuresTableData(yFirstPlot);
