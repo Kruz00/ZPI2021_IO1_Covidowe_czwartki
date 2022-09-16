@@ -10,6 +10,7 @@ import {
   StaticMeasuresTableEnum
 } from "./GetTableData"
 import {vecChange} from "./VecChange"
+import {histogram} from "./Histogram"
 
 const AnalysisSection = ({
                            response,
@@ -65,18 +66,20 @@ const AnalysisSection = ({
   const secondPlotTitle = "Rozkład zmian miesięcznych dla waluty " + mainCurrencyCode + "/" + secondCurrencyCode;
   const monthExchangeRate = GetYFromJson(mainCurrencyMonth, secondCurrencyMonth);
   const monthChangeVec = vecChange(monthExchangeRate)
+  const secondPlotHist = histogram(monthChangeVec, 10);
 
   const thirdPlotTitle = "Rozkład zmian kwartalnych dla waluty " + mainCurrencyCode + "/" + secondCurrencyCode;
   const quarterExchangeRate = GetYFromJson(mainCurrencyQuarter, secondCurrencyQuarter);
   const quarterChangeVec = vecChange(quarterExchangeRate)
+  const thirdPlotHist = histogram(quarterChangeVec, 20);
 
   const seassionTableData = GetSessionTableData(yFirstPlot);
   const staticMeasuresTable = GetStaticMeasuresTableData(yFirstPlot);
   return (
     <div>
       <CustomPlot title={firstPlotTitle} x={xFirstPlot} y={yFirstPlot} type="scatter"/>
-      <CustomPlot title={secondPlotTitle} x={[]} y={[]} type="bar"/>
-      <CustomPlot title={thirdPlotTitle} x={[]} y={[]} type="bar"/>
+      <CustomPlot title={secondPlotTitle} x={secondPlotHist["x"]} y={secondPlotHist["y"]} type="bar"/>
+      <CustomPlot title={thirdPlotTitle} x={thirdPlotHist["x"]} y={thirdPlotHist["y"]} type="bar"/>
       <SessionTable grow={seassionTableData[SessionTableEnum.Grow]}
                     probate={seassionTableData[SessionTableEnum.Probate]}
                     unchanged={seassionTableData[SessionTableEnum.Unchanged]}/>

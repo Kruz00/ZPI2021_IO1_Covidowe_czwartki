@@ -8,7 +8,7 @@ export function histogram(xArray: any[], nBins: any) {
   var bins = new Array(nBins).fill(0);
   var binsLabels: string[] = [];
   for (let i = 0; i < nBins; ++i) {
-    binsLabels.push("(" + (min + i * binRange).toFixed(3) + "," + (min + (i + 1) * binRange).toFixed(3) + ")")
+    binsLabels.push("(" + (min + i * binRange).toFixed(4) + "," + (min + (i + 1) * binRange).toFixed(4) + ")")
   }
   xArray.forEach((x) => bins[Math.floor((x - min) / binRange)]++);
   return {y: bins, x: binsLabels};
