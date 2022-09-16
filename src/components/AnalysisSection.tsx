@@ -20,17 +20,29 @@ const AnalysisSection = ({
                          }: { response: string; response2: string; mainCurrMonth: string; secondCurrMonth: string; mainCurrQuarter: string; secondCurrQuarter: string; }) => {
 
   var mainCurrency;
+  var mainCurrencyMonth;
+  var mainCurrencyQuarter;
   try {
     mainCurrency = JSON.parse(response);
+    mainCurrencyMonth = JSON.parse(mainCurrMonth);
+    mainCurrencyQuarter = JSON.parse(mainCurrQuarter);
   } catch (error) {
     mainCurrency = null;
+    mainCurrencyMonth = null;
+    mainCurrencyQuarter = null;
   }
 
   var secondCurrency;
+  var secondCurrencyMonth;
+  var secondCurrencyQuarter;
   try {
     secondCurrency = JSON.parse(response2);
+    secondCurrencyMonth = JSON.parse(secondCurrMonth);
+    secondCurrencyQuarter = JSON.parse(secondCurrQuarter);
   } catch (error) {
     secondCurrency = null;
+    secondCurrencyMonth = null;
+    secondCurrencyQuarter = null;
   }
   const mainCurrencyFirstPlot: any = [];
   const secondCurrencyFirstPlot: any = [];
@@ -50,9 +62,19 @@ const AnalysisSection = ({
   const yFirstPlot: any = GetYFromJson(mainCurrency, secondCurrency);
 
   const secondPlotTitle = "Rozkład zmian miesięcznych dla waluty " + mainCurrencyCode + "/" + secondCurrencyCode;
+  const monthExchangeRate = GetYFromJson(mainCurrencyMonth, secondCurrencyMonth);
+  const monthChangeVec = []
+  for (let i = 1; i < monthExchangeRate.length; ++i) {
+    monthChangeVec.push(monthExchangeRate[i] - monthExchangeRate[i - 1])
+  }
 
 
   const thirdPlotTitle = "Rozkład zmian kwartalnych dla waluty " + mainCurrencyCode + "/" + secondCurrencyCode;
+  const quarterExchangeRate = GetYFromJson(mainCurrencyQuarter, secondCurrencyQuarter);
+  const quarterChangeVec = []
+  for (let i = 1; i < quarterExchangeRate.length; ++i) {
+    quarterChangeVec.push(quarterExchangeRate[i] - quarterExchangeRate[i - 1])
+  }
 
   const seassionTableData = GetSessionTableData(yFirstPlot);
   const staticMeasuresTable = GetStaticMeasuresTableData(yFirstPlot);
