@@ -3,9 +3,22 @@ import CustomPlot from "./CustomPlot"
 import SessionTable from "./SessionTable"
 import StaticMeasuresTable from "./StaticMeasuresTable"
 import {GetXFromJson, GetYFromJson} from "./GetXYFromJSON"
-import {GetSessionTableData, SessionTableEnum, GetStaticMeasuresTableData, StaticMeasuresTableEnum} from "./GetTableData"
+import {
+  GetSessionTableData,
+  SessionTableEnum,
+  GetStaticMeasuresTableData,
+  StaticMeasuresTableEnum
+} from "./GetTableData"
 
-const AnalysisSection = ({response, response2}: { response: string; response2: string; }) => {
+const AnalysisSection = ({
+                           response,
+                           response2,
+                           mainCurrMonth,
+                           secondCurrMonth,
+                           mainCurrQuarter,
+                           secondCurrQuarter
+                         }: { response: string; response2: string; mainCurrMonth: string; secondCurrMonth: string; mainCurrQuarter: string; secondCurrQuarter: string; }) => {
+
   var mainCurrency;
   try {
     mainCurrency = JSON.parse(response);
@@ -40,8 +53,13 @@ const AnalysisSection = ({response, response2}: { response: string; response2: s
   return (
     <div>
       <CustomPlot title={firstPlotTitle} x={xFirstPlot} y={yFirstPlot} type="scatter"/>
-      <SessionTable grow={seassionTableData[SessionTableEnum.Grow]} probate={seassionTableData[SessionTableEnum.Probate]} unchanged={seassionTableData[SessionTableEnum.Unchanged]}/>
-      <StaticMeasuresTable median={staticMeasuresTable[StaticMeasuresTableEnum.Median]} dominant={staticMeasuresTable[StaticMeasuresTableEnum.Dominant]} standardDeviation={staticMeasuresTable[StaticMeasuresTableEnum.StandardDeviation]} coefficientVariation={staticMeasuresTable[StaticMeasuresTableEnum.CoefficientVariation]}/>
+      <SessionTable grow={seassionTableData[SessionTableEnum.Grow]}
+                    probate={seassionTableData[SessionTableEnum.Probate]}
+                    unchanged={seassionTableData[SessionTableEnum.Unchanged]}/>
+      <StaticMeasuresTable median={staticMeasuresTable[StaticMeasuresTableEnum.Median]}
+                           dominant={staticMeasuresTable[StaticMeasuresTableEnum.Dominant]}
+                           standardDeviation={staticMeasuresTable[StaticMeasuresTableEnum.StandardDeviation]}
+                           coefficientVariation={staticMeasuresTable[StaticMeasuresTableEnum.CoefficientVariation]}/>
     </div>
   )
 }
