@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
 import Plot from 'react-plotly.js';
 
-const CustomPlot = ({title, x, y, type}
-                      : { title: string; x: string[]; y: string[]; type: any }) => {
+const CustomPlot = ({title, x, y, type, xAxisLabel, yAxisLabel}
+                      : { title: string; x: string[]; y: string[]; type: any; xAxisLabel: string; yAxisLabel: string; }) => {
   const layout = {
     title: title,
-
+    xaxis: {
+      title: xAxisLabel
+    },
+    yaxis: {
+      title: yAxisLabel
+    }
   };
   const config = {
     staticPlot: true

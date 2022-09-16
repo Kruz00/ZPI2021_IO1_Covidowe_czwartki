@@ -22,6 +22,10 @@ const MainPage = () => {
   const [analysisSectionVisibilty, setAnalysisSectionVisibilty] = useState(false)
   const [response, setResponse] = useState("")
   const [response2, setResponse2] = useState("")
+  const [mainCurrMonth, setMainCurrMonth] = useState("")
+  const [secondCurrMonth, setSecondCurrMonth] = useState("")
+  const [mainCurrQuarter, setMainCurrQuarter] = useState("")
+  const [secondCurrQuarter, setSecondCurrQuarter] = useState("")
   const analize = async () => {
     if (mainCurrency === "" || secondCurrency === "" || period == TimeInterval.Default) {
       return;
@@ -33,8 +37,13 @@ const MainPage = () => {
       setCurrencyError(false)
     }
     try {
-        setResponse(await getTimeIntervalJSON(mainCurrency, period));
-        setResponse2(await getTimeIntervalJSON(secondCurrency, period));
+      setResponse(await getTimeIntervalJSON(mainCurrency, period));
+      setResponse2(await getTimeIntervalJSON(secondCurrency, period));
+
+      setMainCurrMonth(await getTimeIntervalJSON(mainCurrency, TimeInterval.Month));
+      setSecondCurrMonth(await getTimeIntervalJSON(secondCurrency, TimeInterval.Month));
+      setMainCurrQuarter(await getTimeIntervalJSON(mainCurrency, TimeInterval.Quarter));
+      setSecondCurrQuarter(await getTimeIntervalJSON(secondCurrency, TimeInterval.Quarter));
 
       setAnalysisSectionVisibilty(true)
     } catch (error) {
@@ -48,7 +57,10 @@ const MainPage = () => {
                         analysisButtonCallback={analize}/>
       {currencyError ? <div>Wybór dwóch takich samych walut nie dozwolony</div> : null}
       {apiError ? <div>Problem z komunikacją z API</div> : null}
-      {analysisSectionVisibilty ? <AnalysisSection response={response} response2={response2} /> : null}
+      {analysisSectionVisibilty ?
+        <AnalysisSection response={response} response2={response2} mainCurrMonth={mainCurrMonth}
+                         secondCurrMonth={secondCurrMonth} mainCurrQuarter={mainCurrQuarter}
+                         secondCurrQuarter={secondCurrQuarter}/> : null}
     </div>
 
   )
