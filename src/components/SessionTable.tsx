@@ -5,7 +5,8 @@ const SessionTable = ({grow, probate, unchanged}
 
   return (
     <div>
-      <table >
+      <h2 id="centerAlign">Ilość sesji</h2>
+      <table>
         <tbody>
          <tr>
           <td>Ilość sesji wzrostowy:</td>

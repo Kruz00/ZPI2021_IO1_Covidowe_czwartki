@@ -33,6 +33,13 @@ td {
     text-align: right;
 }
 
+#centerAlign {
+    text-align: center;
+    font-family: Arial;
+    font-size: large;
+    margin: 10px;
+}
+
 #leftAlign {
     text-align: left;
 }

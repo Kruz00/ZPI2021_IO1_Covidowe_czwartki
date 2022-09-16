@@ -5,6 +5,7 @@ const StaticMesuresTable = ({median, dominant, standardDeviation, coefficientVar
 
   return (
     <div>
+      <h2 id="centerAlign">Miary statystyczne</h2>
       <table>
         <tbody>
          <tr>
