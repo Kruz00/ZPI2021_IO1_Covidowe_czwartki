@@ -37,6 +37,7 @@ const AnalysisSection = ({
   const mainCurrencyCode = mainCurrency == null ? "PLN" : mainCurrency['code']
   const secondCurrencyCode = secondCurrency == null ? "PLN" : secondCurrency['code']
 
+
   if (!mainCurrency && !secondCurrency) {
     return (
       <div>
@@ -48,11 +49,18 @@ const AnalysisSection = ({
   const xFirstPlot = mainCurrency == null ? GetXFromJson(secondCurrency) : GetXFromJson(mainCurrency);
   const yFirstPlot: any = GetYFromJson(mainCurrency, secondCurrency);
 
+  const secondPlotTitle = "Rozkład zmian miesięcznych dla waluty " + mainCurrencyCode + "/" + secondCurrencyCode;
+
+
+  const thirdPlotTitle = "Rozkład zmian kwartalnych dla waluty " + mainCurrencyCode + "/" + secondCurrencyCode;
+
   const seassionTableData = GetSessionTableData(yFirstPlot);
   const staticMeasuresTable = GetStaticMeasuresTableData(yFirstPlot);
   return (
     <div>
       <CustomPlot title={firstPlotTitle} x={xFirstPlot} y={yFirstPlot} type="scatter"/>
+      <CustomPlot title={secondPlotTitle} x={[]} y={[]} type="bar"/>
+      <CustomPlot title={thirdPlotTitle} x={[]} y={[]} type="bar"/>
       <SessionTable grow={seassionTableData[SessionTableEnum.Grow]}
                     probate={seassionTableData[SessionTableEnum.Probate]}
                     unchanged={seassionTableData[SessionTableEnum.Unchanged]}/>
