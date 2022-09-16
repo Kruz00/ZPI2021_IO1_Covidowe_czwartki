@@ -77,12 +77,12 @@ const AnalysisSection = ({
   const staticMeasuresTable = GetStaticMeasuresTableData(yFirstPlot);
   return (
     <div>
-      <CustomPlot title={firstPlotTitle} x={xFirstPlot} y={yFirstPlot} type="scatter" xAxisLabel="Czas"
-                  yAxisLabel="Kurs"/>
+      <CustomPlot title={firstPlotTitle} x={xFirstPlot} y={yFirstPlot} type="scatter" xAxisLabel="Data"
+                  yAxisLabel="Kurs waluty w danej chwili"/>
       <CustomPlot title={secondPlotTitle} x={secondPlotHist["x"]} y={secondPlotHist["y"]} type="bar"
-                  xAxisLabel="Przedziały" yAxisLabel="Ilość zmian"/>
+                  xAxisLabel="Przedziały wielkości spadków/wzrostów" yAxisLabel="Ilość sesji"/>
       <CustomPlot title={thirdPlotTitle} x={thirdPlotHist["x"]} y={thirdPlotHist["y"]} type="bar"
-                  xAxisLabel="Przedziały" yAxisLabel="Ilość zmian"/>
+                  xAxisLabel="Przedziały wielkości spadków/wzrostów" yAxisLabel="Ilość sesji"/>
       <SessionTable grow={seassionTableData[SessionTableEnum.Grow]}
                     probate={seassionTableData[SessionTableEnum.Probate]}
                     unchanged={seassionTableData[SessionTableEnum.Unchanged]}/>
