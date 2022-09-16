@@ -11,7 +11,7 @@ export enum TimeInterval {
 export async function getJSON(keyCurrency: string, startDate: string, endDate: string){
     console.log('getJSON attributes ',keyCurrency, " ", startDate, " ", endDate);
     try {
-        const response = await  fetch('http://api.nbp.pl/api/exchangerates/rates/a/'+keyCurrency+'/'+startDate+'/'+endDate+'/', {
+        const response = await  fetch('https://api.nbp.pl/api/exchangerates/rates/a/'+keyCurrency+'/'+startDate+'/'+endDate+'/', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
