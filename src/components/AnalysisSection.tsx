@@ -77,9 +77,12 @@ const AnalysisSection = ({
   const staticMeasuresTable = GetStaticMeasuresTableData(yFirstPlot);
   return (
     <div>
-      <CustomPlot title={firstPlotTitle} x={xFirstPlot} y={yFirstPlot} type="scatter"/>
-      <CustomPlot title={secondPlotTitle} x={secondPlotHist["x"]} y={secondPlotHist["y"]} type="bar"/>
-      <CustomPlot title={thirdPlotTitle} x={thirdPlotHist["x"]} y={thirdPlotHist["y"]} type="bar"/>
+      <CustomPlot title={firstPlotTitle} x={xFirstPlot} y={yFirstPlot} type="scatter" xAxisLabel="Czas"
+                  yAxisLabel="Kurs"/>
+      <CustomPlot title={secondPlotTitle} x={secondPlotHist["x"]} y={secondPlotHist["y"]} type="bar"
+                  xAxisLabel="Przedziały" yAxisLabel="Ilość zmian"/>
+      <CustomPlot title={thirdPlotTitle} x={thirdPlotHist["x"]} y={thirdPlotHist["y"]} type="bar"
+                  xAxisLabel="Przedziały" yAxisLabel="Ilość zmian"/>
       <SessionTable grow={seassionTableData[SessionTableEnum.Grow]}
                     probate={seassionTableData[SessionTableEnum.Probate]}
                     unchanged={seassionTableData[SessionTableEnum.Unchanged]}/>
